@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { services, projects } from '../data/home';
+---
+
+<BaseLayout>
+  <div id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+        <source src="/videos/montara-hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <SiteHeader />
+      <div class="hero__content page-gutter">
+        <p class="eyebrow hero__eyebrow">Sanctuary curated. Technology mastered.</p>
+        <h1 id="hero-title" data-hero-title>Light / Shade / Sound / Cinema / Wellness</h1>
+      </div>
+      <a class="hero__scroll" href="#approach" aria-label="Scroll to discover Montara"><span aria-hidden="true">⌄</span></a>
+    </section>
+
+    <main>
+      <section class="story-section js-gradient" id="approach" aria-label="About Montara">
+        <div class="story-section__fixed" aria-hidden="true">
+          <img class="story-section__image" src="/images/montara-gradient.webp" alt="" loading="lazy" />
+          <span class="story-section__wash"></span>
+          <span class="story-section__aura"></span>
+        </div>
+        <div class="story-section__content">
+          <p data-story-copy>We design, install and support technology that elevates everyday living into something extraordinary. From emotive lighting and shading to spectacular home cinema, working across lighting design and control, Lutron and Crestron systems, media walls, and whole-home automation, every detail is delivered with meticulous craftsmanship, seamless collaboration, and support that lasts the life of the system.</p>
+          <p data-story-copy>Based in Cheshire and working across the UK, Montara holds CEDIA Member of Excellence status, one of only 16 companies worldwide to do so, and the highest recognition from the industry's global governing body. We are also among a select few to hold HTA Certification, independently verified across technical proficiency, aftercare, and client satisfaction.</p>
+          <p data-story-copy>Our Studio in Cheshire is the only dedicated space in the North West where you can experience Lutron controls, architectural lighting and audio, immersive home cinema and hidden technology woven into a beautifully designed residential setting, before a single decision is made.</p>
+          <a class="story-section__cta" data-story-copy href="#studio">Discover the Studio <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="services-section" id="services" aria-labelledby="services-title">
+        <div class="section-heading page-gutter" data-reveal>
+          <div><span class="section-index">02 / WHAT WE DO</span><span class="small-rule"></span></div>
+          <h2 id="services-title">A home, in <em>harmony.</em></h2>
+          <p>Thoughtful technology. Beautifully integrated. Every system is selected to work quietly together, and to feel entirely your own.</p>
+        </div>
+        <div class="services-grid page-gutter">
+          {services.map((service) => <ServiceCard {...service} />)}
+        </div>
+        <div class="services-note page-gutter" data-reveal><span>ONE THOUGHTFUL SYSTEM. A MORE NATURAL WAY TO LIVE.</span><a class="text-link text-link--light" href="#contact">Explore your possibilities <span aria-hidden="true">↗</span></a></div>
+      </section>
+
+      <section class="studio-section page-gutter" id="studio" aria-labelledby="studio-title">
+        <div class="studio-section__image" data-reveal>
+          <img src="/images/home-hero.png" alt="Warm, natural materials and soft lighting in a contemporary home" loading="lazy" />
+          <span class="studio-section__image-caption">A glimpse of the considered everyday</span>
+        </div>
+        <div class="studio-section__copy" data-reveal>
+          <span class="section-index">03 / EXPERIENCE MONTARA</span>
+          <span class="small-rule"></span>
+          <h2 id="studio-title">Come in.<br /><em>Feel the difference.</em></h2>
+          <p>Our Cheshire studio is a home in its own right: a place to experience beautiful light, enveloping sound and technology that knows when to step back.</p>
+          <a class="text-link" href="#contact">Discover Montara Studio <span aria-hidden="true">↗</span></a>
+          <span class="studio-section__watermark" aria-hidden="true">S</span>
+        </div>
+      </section>
+
+      <section class="projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading section-heading--projects page-gutter" data-reveal>
+          <div><span class="section-index">04 / SELECTED PROJECTS</span><span class="small-rule"></span></div>
+          <h2 id="projects-title">Spaces made <em>personal.</em></h2>
+          <p>A few of the places where considered technology and beautiful design come together.</p>
+        </div>
+        <div class="projects-grid page-gutter">
+          {projects.map((project) => <ProjectCard {...project} />)}
+        </div>
+        <a class="projects-more" href="#contact">See what we could create together <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="contact-section page-gutter" id="contact" aria-labelledby="contact-title">
+        <div class="contact-section__meta"><span class="section-index">05 / THE NEXT STEP</span><span>YOUR HOME, MORE IN TUNE.</span></div>
+        <div class="contact-section__body" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__line"></span> Ready when you are</p>
+          <h2 id="contact-title">Let’s make<br /><em>space for living.</em></h2>
+          <a class="contact-button" href="mailto:info@sona.technology"><span>Start a conversation</span><span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-section__background" aria-hidden="true">SONA</div>
+      </section>
+    </main>
+    <SiteFooter />
+    <a class="booking-pill" href="#contact">Book Now</a>
+  </div>
+</BaseLayout>
+
+<script src="../scripts/animations.ts"></script>

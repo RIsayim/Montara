@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  partner: string;
+  image: string;
+  imageAlt: string;
+  category: string;
+}
+
+const { title, partner, image, imageAlt, category } = Astro.props;
+---
+
+<article class="project-card" data-reveal>
+  <a class="project-card__image-wrap" href="#contact" aria-label={`Discuss a project like ${title}`}>
+    <img src={image} alt={imageAlt} loading="lazy" />
+    <span class="project-card__category">{category}</span>
+    <span class="project-card__arrow" aria-hidden="true">↗</span>
+  </a>
+  <p class="project-card__partner">WITH {partner}</p>
+  <h3>{title}</h3>
+</article>

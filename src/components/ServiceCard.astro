@@ -1,0 +1,24 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  id: string;
+}
+
+const { number, title, description, image, imageAlt, id } = Astro.props;
+---
+
+<article class="service-card" id={id} data-reveal>
+  <a class="service-card__image-wrap" href="#contact" aria-label={`Explore ${title}`}>
+    <img class="service-card__image" src={image} alt={imageAlt} loading="lazy" />
+    <span class="service-card__number">{number}</span>
+    <span class="service-card__image-arrow" aria-hidden="true">↗</span>
+  </a>
+  <div class="service-card__copy">
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</article>
