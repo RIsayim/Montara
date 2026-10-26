@@ -1,0 +1,328 @@
+﻿---
+import RollingText from './RollingText.astro';
+
+const coreServices = [
+  {
+    title: 'Security & Cameras',
+    href: '/security-cameras/',
+    image: '/images/service-light.webp',
+    alt: 'Warmly lit front entrance of a contemporary home',
+  },
+  {
+    title: 'Home Network & WiFi',
+    href: '/home-network-wifi/',
+    image: '/images/home-hero.png',
+    alt: 'A considered modern home interior',
+  },
+  {
+    title: 'Whole-Home Audio',
+    href: '/whole-home-audio/',
+    image: '/images/service-sound.webp',
+    alt: 'A refined living space designed for listening',
+  },
+  {
+    title: 'Intelligent Lighting',
+    href: '/intelligent-lighting/',
+    image: '/images/service-wellness.webp',
+    alt: 'A landscaped contemporary home at dusk',
+  },
+  {
+    title: 'Automated Shades',
+    href: '/automated-shades/',
+    image: '/images/service-shade.webp',
+    alt: 'Soft daylight filtered through automated shades',
+  },
+  {
+    title: 'Home Theater',
+    href: '/home-theater/',
+    image: '/images/service-cinema.webp',
+    alt: 'A cinematic private home theater',
+  },
+];
+---
+
+<section class="core-services" id="services" aria-labelledby="core-services-title" data-core-services>
+  <div class="core-services__inner">
+    <div class="core-services__list">
+      <h2 class="core-services__eyebrow" id="core-services-title" data-service-intro>What we do</h2>
+      <nav aria-label="Montara core services">
+        <ul>
+          {coreServices.map((service, index) => (
+            <li data-service-intro>
+              <a
+                class:list={['core-services__link', index === 0 && 'is-active']}
+                href={service.href}
+                data-service-index={index}
+                data-roll-item
+                aria-controls="core-services-preview"
+              >
+                <RollingText label={service.title} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="core-services__divider" aria-hidden="true"></div>
+
+    <div class="core-services__media" id="core-services-preview" data-service-media>
+      <div class="core-services__stage" data-service-stage>
+        {coreServices.map((service, index) => (
+          <figure
+            class:list={['core-services__preview', index === 0 && 'is-active']}
+            data-service-preview={index}
+            aria-hidden={index !== 0 ? 'true' : 'false'}
+          >
+            <img
+              class="core-services__image"
+              src={service.image}
+              alt={service.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { initRollingList } from '../scripts/rolling-list';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-core-services]').forEach((section) => {
+    const previews = Array.from(section.querySelectorAll<HTMLElement>('[data-service-preview]'));
+    initRollingList(section, {
+      reducedMotion,
+      onChange: (nextIndex) => {
+        previews.forEach((preview, index) => {
+          const active = index === nextIndex;
+          preview.classList.toggle('is-active', active);
+          preview.setAttribute('aria-hidden', String(!active));
+        });
+      },
+    });
+
+    if (!reducedMotion) {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top+=25%',
+          once: true,
+        },
+      })
+        .from(section.querySelector('[data-service-media]'), {
+          clipPath: 'inset(0 0 100% 0)',
+          duration: 1.75,
+          ease: 'power3.out',
+        }, 0.25)
+        .from(section.querySelector('[data-service-stage]'), {
+          scale: 1.35,
+          duration: 1.75,
+          ease: 'power3.out',
+        }, 0.25)
+        .from(section.querySelectorAll('[data-service-intro]'), {
+          opacity: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: 'none',
+        }, 0);
+
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+  });
+</script>
+
+<style>
+  .core-services {
+    --services-unit: min(12px, calc(100vw / 192));
+    position: relative;
+    z-index: 1;
+    padding-block: calc(var(--services-unit) * 30);
+    color: #151515;
+    background: #f1f0f1;
+  }
+
+  .core-services__inner {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(22, minmax(0, 1fr));
+  }
+
+  .core-services__list {
+    grid-column: 4 / span 5;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .core-services__eyebrow {
+    margin: 0 0 calc(var(--services-unit) * 2);
+    font-family: var(--font-ui);
+    font-size: calc(var(--services-unit) * 1.2);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  .core-services nav {
+    width: 100%;
+  }
+
+  .core-services nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .core-services nav li {
+    max-width: 100%;
+    margin-block: calc(var(--services-unit) * 1.5);
+  }
+
+  .core-services__link {
+    display: block;
+    position: relative;
+    color: #151515;
+    font-family: var(--font-editorial);
+    font-size: calc(var(--services-unit) * 3);
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-editorial);
+    text-decoration: none;
+  }
+
+  .core-services__link:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 5px;
+  }
+
+  .core-services__divider {
+    grid-column: 11;
+    grid-row: 1;
+    border-left: 1px solid rgb(21 21 21 / 10%);
+  }
+
+  .core-services__media {
+    grid-column: 15 / span 5;
+    grid-row: 1;
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    clip-path: inset(0);
+  }
+
+  .core-services__stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.35;
+  }
+
+  .core-services__preview {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  .core-services__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    transform: scale(1.5);
+  }
+
+  .core-services__preview.is-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1), transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .core-services__preview.is-active .core-services__image {
+    transform: scale(1);
+    transition: transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  @media (min-width: 650px) and (max-width: 1023px) {
+    .core-services {
+      --services-unit: 10px;
+      padding-block: 100px;
+    }
+
+    .core-services__list {
+      grid-column: 2 / span 8;
+    }
+
+    .core-services__media {
+      grid-column: 13 / span 8;
+    }
+
+    .core-services__link {
+      font-size: clamp(20px, 2.9vw, 25px);
+    }
+
+    .core-services nav li {
+      margin-block: 12px;
+    }
+  }
+
+  @media (max-width: 649px) {
+    .core-services {
+      --services-unit: min(12px, calc(100vw / 37.5));
+      padding-block: calc(var(--services-unit) * 10);
+    }
+
+    .core-services__inner {
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+    }
+
+    .core-services__media {
+      grid-column: 2 / span 8;
+      grid-row: 1;
+    }
+
+    .core-services__list {
+      grid-column: 2 / span 8;
+      grid-row: 2;
+      margin-top: calc(var(--services-unit) * 5);
+    }
+
+    .core-services__link {
+      font-size: calc(var(--services-unit) * 2.3);
+    }
+
+    .core-services nav li {
+      margin-block: var(--services-unit);
+    }
+
+    .core-services__divider {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .core-services__preview.is-active,
+    .core-services__preview.is-active .core-services__image {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,258 @@
+@font-face {
+  font-family: 'Montara Trade Gothic';
+  src: url('/fonts/montara-trade-gothic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-editorial: 'plantin', Georgia, serif;
+  --font-ui: 'Montara Trade Gothic', Arial, sans-serif;
+  --tracking-editorial: -0.025em;
+  --tracking-label: 0.2em;
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-editorial);
+}
+
+body {
+  font-family: var(--font-editorial);
+  font-size: 18px;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6,
+.hero h1,
+.section-heading h2,
+.intro-section h2,
+.studio-section h2,
+.contact-section h2,
+.project-card h3,
+.service-card h3,
+.credentials strong {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-editorial);
+}
+
+.hero h1 em,
+.section-heading h2 em,
+.intro-section h2 em,
+.studio-section h2 em,
+.contact-section h2 em {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  letter-spacing: var(--tracking-editorial);
+}
+
+.story-section__content p,
+.mega-menu__brand p,
+.site-footer__top > p,
+.credentials__note {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  letter-spacing: var(--tracking-editorial);
+}
+
+.wordmark__name,
+.primary-navigation .mega-menu__wordmark .wordmark__name {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+}
+
+.primary-navigation .mega-menu__wordmark {
+  font-size: inherit;
+  line-height: 1;
+}
+
+.intro-section__details p,
+.section-heading > p,
+.studio-section__copy > p,
+.service-card p {
+  font-size: clamp(17px, 1.1vw, 20px);
+  line-height: 1.55;
+}
+
+button,
+input,
+select,
+textarea,
+.eyebrow,
+.section-index,
+.hero__location,
+.hero__index,
+.services-note > span,
+.contact-section__meta,
+.studio-section__image-caption,
+.project-card__category,
+.project-card__partner,
+.credentials small,
+.wordmark__descriptor,
+.header-cta,
+.menu-toggle,
+.mega-menu__close,
+.text-link,
+.projects-more,
+.contact-button,
+.story-section__cta,
+.booking-pill,
+.footer-email,
+.site-footer__bottom {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.eyebrow,
+.section-index,
+.hero__location,
+.hero__index,
+.services-note > span,
+.contact-section__meta > span:last-child {
+  font-size: clamp(10px, 0.625vw, 12px);
+  line-height: 1.35;
+  letter-spacing: var(--tracking-label);
+}
+
+.studio-section__image-caption,
+.project-card__category,
+.project-card__partner {
+  font-size: clamp(10px, 0.625vw, 12px);
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+}
+
+.footer-email,
+.text-link,
+.projects-more {
+  font-size: 13px;
+}
+
+.site-footer__bottom {
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.contact-section__background,
+.studio-section__watermark {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+}
+
+.rolling-text {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding-inline: 0.08em;
+  line-height: 1.25;
+}
+
+.rolling-text__regular {
+  display: block;
+  opacity: 0.25;
+}
+
+.rolling-text__italic {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  transform: translateY(105%);
+}
+
+.is-active > .rolling-text > .rolling-text__regular {
+  transform: translateY(-105%);
+}
+
+.is-active > .rolling-text > .rolling-text__italic {
+  transform: translateY(0);
+}
+
+.primary-navigation .mega-menu__links a {
+  display: block;
+  max-width: 100%;
+  color: #151515;
+  font-family: var(--font-editorial);
+  font-size: clamp(30px, 2.25vw, 43px);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-editorial);
+}
+
+.primary-navigation a::after,
+.mega-menu__links a::before {
+  content: none;
+  display: none;
+  animation: none;
+}
+
+.mega-menu__panel,
+.mega-menu__content {
+  background-color: #f1f0f1;
+}
+
+.mega-menu__content {
+  min-height: 0;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-block: 80px;
+}
+
+.mega-menu__links {
+  gap: clamp(10px, 1.8vh, 20px);
+  margin-block: auto;
+  flex-shrink: 0;
+}
+
+.mega-menu__close {
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .hero h1 {
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .primary-navigation .mega-menu__links a {
+    font-size: clamp(28px, 3.8vw, 36px);
+  }
+}
+
+@media (max-width: 680px) {
+  .mega-menu__panel {
+    grid-template-rows: clamp(140px, 20svh, 180px) minmax(0, 1fr);
+  }
+
+  .mega-menu__brand p {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .mega-menu__content {
+    padding-block: 24px max(84px, calc(env(safe-area-inset-bottom) + 70px));
+  }
+
+  .mega-menu__links {
+    margin-block: 0;
+  }
+
+  .primary-navigation .mega-menu__links a {
+    font-size: clamp(26px, 7vw, 32px);
+  }
+
+  .mega-menu__close {
+    color: #eae8eb;
+  }
+
+  .site-footer__top > p {
+    font-size: 18px;
+  }
+}

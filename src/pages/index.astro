@@ -1,31 +1,32 @@
 ---
+import CoreServices from '../components/CoreServices.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import ServiceCard from '../components/ServiceCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { services, projects } from '../data/home';
+import { projects } from '../data/home';
 ---
 
 <BaseLayout>
   <div id="top">
-    <section class="hero" aria-labelledby="hero-title">
+    <SiteHeader />
+    <main>
+      <div class="home-scene" data-home-scene>
+        <section class="hero" aria-labelledby="hero-title">
       <video class="hero__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
         <source src="/videos/montara-hero.mp4" type="video/mp4" />
       </video>
       <div class="hero__shade" aria-hidden="true"></div>
-      <SiteHeader />
       <div class="hero__content page-gutter">
         <p class="eyebrow hero__eyebrow">Sanctuary curated. Technology mastered.</p>
         <h1 id="hero-title" data-hero-title>Light / Shade / Sound / Cinema / Wellness</h1>
       </div>
-      <a class="hero__scroll" href="#approach" aria-label="Scroll to discover Montara"><span aria-hidden="true">⌄</span></a>
-    </section>
+      <a class="hero__scroll" href="#approach" data-scroll-story aria-label="Scroll to discover Montara"><span aria-hidden="true">⌄</span></a>
+        </section>
 
-    <main>
-      <section class="story-section js-gradient" id="approach" aria-label="About Montara">
+        <section class="story-section js-gradient" id="approach" aria-label="About Montara">
         <div class="story-section__fixed" aria-hidden="true">
-          <img class="story-section__image" src="/images/montara-gradient.webp" alt="" loading="lazy" />
+          <img class="story-section__image" src="/images/montara-gradient.webp" alt="" loading="eager" decoding="async" />
           <span class="story-section__wash"></span>
           <span class="story-section__aura"></span>
         </div>
@@ -35,19 +36,16 @@ import { services, projects } from '../data/home';
           <p data-story-copy>Our Studio in Cheshire is the only dedicated space in the North West where you can experience Lutron controls, architectural lighting and audio, immersive home cinema and hidden technology woven into a beautifully designed residential setting, before a single decision is made.</p>
           <a class="story-section__cta" data-story-copy href="#studio">Discover the Studio <span aria-hidden="true">↗</span></a>
         </div>
+        </section>
+      </div>
+      <section class="film-section" aria-label="Montara studio film">
+        <video class="film-section__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+          <source src="/videos/sona.mp4" type="video/mp4" />
+        </video>
+        <div class="film-section__shade" aria-hidden="true"></div>
       </section>
 
-      <section class="services-section" id="services" aria-labelledby="services-title">
-        <div class="section-heading page-gutter" data-reveal>
-          <div><span class="section-index">02 / WHAT WE DO</span><span class="small-rule"></span></div>
-          <h2 id="services-title">A home, in <em>harmony.</em></h2>
-          <p>Thoughtful technology. Beautifully integrated. Every system is selected to work quietly together, and to feel entirely your own.</p>
-        </div>
-        <div class="services-grid page-gutter">
-          {services.map((service) => <ServiceCard {...service} />)}
-        </div>
-        <div class="services-note page-gutter" data-reveal><span>ONE THOUGHTFUL SYSTEM. A MORE NATURAL WAY TO LIVE.</span><a class="text-link text-link--light" href="#contact">Explore your possibilities <span aria-hidden="true">↗</span></a></div>
-      </section>
+      <CoreServices />
 
       <section class="studio-section page-gutter" id="studio" aria-labelledby="studio-title">
         <div class="studio-section__image" data-reveal>

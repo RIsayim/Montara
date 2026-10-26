@@ -1,0 +1,12 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<span class="rolling-text">
+  <span class="rolling-text__regular" data-roll-regular>{label}</span>
+  <span class="rolling-text__italic" data-roll-italic aria-hidden="true">{label}</span>
+</span>
